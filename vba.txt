@@ -1,0 +1,32 @@
+Option Explicit
+
+Sub ori1()
+    Dim gaze As Variant
+    Dim AnswerTime As Variant
+    Dim Sum(200) As Variant
+    Dim i As Integer
+    Dim j As Integer
+    Dim k As Integer
+
+    j = 1
+    k = 0
+    '視線移動量
+    gaze = WorksheetFunction.Transpose(Range("B23:C12022"))
+    '一問当たりの解答時間
+    AnswerTime = WorksheetFunction.Transpose(Range("A23:J100"))
+    On Error Resume Next
+    '一問ごとの解答時間内の視線移動量を足していく
+    For i = 1 To 12000
+        If gaze(1, i) < AnswerTime(j) Then
+            Sum(k) = Sum(k) + gaze(2, i)
+        Else
+            j = j + 1
+            k = k + 1
+            Sum(k) = Sum(k) + gaze(2, i)
+        'ElseIf gaze(2, 1) < AnswerTime(1) Then
+        '    Sum = Sum + gaze(2, 2)
+        End If
+    Debug.Print Sum(k)
+    Next
+    Range("I7:ZZ7") = Sum
+End Sub
