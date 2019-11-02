@@ -1,5 +1,4 @@
 Option Explicit
-
 Sub ori1()
     Dim gaze As Variant
     Dim AnswerTime As Variant
@@ -13,7 +12,7 @@ Sub ori1()
     '視線移動量
     gaze = WorksheetFunction.Transpose(Range("B23:C12022"))
     '一問当たりの解答時間
-    AnswerTime = WorksheetFunction.Transpose(Range("A23:J100"))
+    AnswerTime = WorksheetFunction.Transpose(Range("A23:A150"))
     On Error Resume Next
     '一問ごとの解答時間内の視線移動量を足していく
     For i = 1 To 12000
@@ -28,5 +27,6 @@ Sub ori1()
         End If
     Debug.Print Sum(k)
     Next
-    Range("I7:ZZ7") = Sum
+    '縦方向に結果を挿入
+    Range("E23:E150") = WorksheetFunction.Transpose(Sum)
 End Sub
